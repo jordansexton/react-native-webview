@@ -67,6 +67,8 @@ static NSString *const MessageHandlerName = @"ReactNativeWebview";
     super.backgroundColor = [UIColor clearColor];
     _bounces = YES;
     _scrollEnabled = YES;
+    _showsHorizontalScrollIndicator = YES;
+    _showsVerticalScrollIndicator = YES;
     _automaticallyAdjustContentInsets = YES;
     _contentInset = UIEdgeInsetsZero;
   }
@@ -121,6 +123,8 @@ static NSString *const MessageHandlerName = @"ReactNativeWebview";
     _webView.scrollView.scrollEnabled = _scrollEnabled;
     _webView.scrollView.pagingEnabled = _pagingEnabled;
     _webView.scrollView.bounces = _bounces;
+    _webView.scrollView.showsHorizontalScrollIndicator = _showsHorizontalScrollIndicator;
+    _webView.scrollView.showsVerticalScrollIndicator = _showsVerticalScrollIndicator;
     _webView.allowsLinkPreview = _allowsLinkPreview;
     [_webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     _webView.allowsBackForwardNavigationGestures = _allowsBackForwardNavigationGestures;
@@ -299,6 +303,18 @@ static NSString *const MessageHandlerName = @"ReactNativeWebview";
 {
   _scrollEnabled = scrollEnabled;
   _webView.scrollView.scrollEnabled = scrollEnabled;
+}
+
+- (void)setShowsHorizontalScrollIndicator:(BOOL)showsHorizontalScrollIndicator
+{
+    _showsHorizontalScrollIndicator = showsHorizontalScrollIndicator;
+    _webView.scrollView.showsHorizontalScrollIndicator = showsHorizontalScrollIndicator;
+}
+
+- (void)setShowsVerticalScrollIndicator:(BOOL)showsVerticalScrollIndicator
+{
+    _showsVerticalScrollIndicator = showsVerticalScrollIndicator;
+    _webView.scrollView.showsVerticalScrollIndicator = showsVerticalScrollIndicator;
 }
 
 - (void)postMessage:(NSString *)message
